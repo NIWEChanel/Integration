@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIWE GISUBIZO HERVE CHANEL - Portfolio</title>
+    <style>
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f20, #2a2a40); /* Deep space background */
+            color: #e0e0e0;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full viewport height */
+            position: relative; /* For particle background positioning */
+        }
+
+        /* Particle Background - CSS */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Behind content */
+            pointer-events: none; /* Allow interaction with content below */
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2; /* Above particles */
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            color: #61dafb; /* Tron blue */
+            text-shadow: 0 0 10px rgba(97, 218, 251, 0.7);
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header p {
+            font-size: 1.5em;
+            color: #a0a0a0;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Main Content Section */
+        .container {
+            flex-grow: 1; /* Takes remaining space */
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #61dafb;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); text-shadow: 0 0 5px #61dafb; }
+            to { transform: scale(1.02); text-shadow: 0 0 15px #61dafb; }
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        /* Typewriter Effect Styling */
+        #typewriter-text {
+            border-right: 2px solid rgba(255, 255, 255, .75);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255, 255, 255, .75) }
+        }
+
+        /* Skill Section */
+        .skills {
+            margin-top: 40px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            font-size: 1.2em;
+            color: #9aff9a; /* Bright green */
+            margin-bottom: 8px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .skill-bar {
+            background-color: #333;
+            border-radius: 10px;
+            height: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(to right, #61dafb, #9aff9a);
+            width: 0; /* Initial width for animation */
+            border-radius: 10px;
+            animation: fillSkillBar 1.5s ease-out forwards; /* 'forwards' keeps the final state */
+        }
+
+        /* Keyframes for skill bar animation */
+        @keyframes fillSkillBar {
+            to { width: var(--skill-width); } /* Use CSS variable for dynamic width */
+        }
+
+        /* Call-to-Action Button */
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #61dafb, #9aff9a);
+            color: #0f0f20;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(97, 218, 251, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(97, 218, 251, 0.6);
+            color: #fff; /* White text on hover */
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+            transform: skewX(-20deg);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            color: #a0a0a0;
+            font-size: 0.9em;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            z-index: 100; /* On top of everything */
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .dark-mode-toggle svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Dark Mode Specific Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a1a, #333333);
+            color: #f0f0f0;
+        }
+
+        body.dark-mode header {
+            background: rgba(25, 25, 25, 0.6);
+        }
+
+        body.dark-mode .container {
+            background: rgba(25, 25, 25, 0.8);
+        }
+
+        body.dark-mode h1, body.dark-mode h2 {
+            color: #9aff9a; /* Greenish in dark mode */
+            text-shadow: 0 0 10px rgba(154, 255, 154, 0.7);
+        }
+
+        body.dark-mode .cta-button {
+            background: linear-gradient(45deg, #9aff9a, #61dafb);
+            color: #1a1a1a;
+            box-shadow: 0 5px 15px rgba(154, 255, 154, 0.4);
+        }
+
+        body.dark-mode .cta-button:hover {
+             box-shadow: 0 10px 20px rgba(154, 255, 154, 0.6);
+        }
+
+        body.dark-mode footer {
+            background: rgba(25, 25, 25, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1.2em;
+            }
+
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+
+            .dark-mode-toggle {
+                width: 40px;
+                height: 40px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .dark-mode-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .container {
+                margin: 15px;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .cta-button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8-8-3.59-8-8z"/>
+        </svg>
+    </div>
+
+    <header>
+        <h1>Welcome!</h1>
+        <p><span id="typewriter-text"></span></p>
+    </header>
+
+    <div class="container">
+        <h2>About Me</h2>
+        <p>
+            Hello! I'm NIWE GISUBIZO HERVE CHANEL, a passionate and dedicated student in L5 SWD.
+            I'm constantly eager to learn and grow my skills in software development.
+            This portfolio page is a glimpse into my journey and aspirations.
+            I love to create interactive and user-friendly web experiences.
+        </p>
+
+        <h2>My Skills</h2>
+        <div class="skills">
+            <div class="skill-item">
+                <div class="skill-name">HTML5 & CSS3</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Web Development Concepts</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-width: 75%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Problem Solving</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-width: 85%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="cta-button">Explore My Projects!</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NIWE GISUBIZO HERVE CHANEL. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for Typewriter Effect
+        const textToType = "MY name is NIWE GISUBIZO HERVE CHANEL, I'M 19+ YEARS OLD, I'M STUDENT FROM L5 SWD";
+        const typewriterElement = document.getElementById('typewriter-text');
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                typewriterElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 70); // Typing speed
+            } else {
+                // Optional: You can make it disappear and re-type or just stop
+            }
+        }
+
+        // Start typing after a short delay
+        window.onload = () => {
+            setTimeout(typeWriter, 500); // Delay before typing starts
+            animateSkillBars(); // Animate skill bars on load
+        };
+
+        // JavaScript for Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            // Store user preference in localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check for saved theme preference on load
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // JavaScript for Skill Bar Animation on Scroll/Visibility
+        function animateSkillBars() {
+            const skillProgressBars = document.querySelectorAll('.skill-progress');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.5 // trigger when 50% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Apply animation when element is in view
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            skillProgressBars.forEach(bar => {
+                bar.style.animationPlayState = 'paused'; // Pause animation initially
+                observer.observe(bar);
+            });
+        }
+
+        // JavaScript for Particle Background
+        // A simplified particle system - for a robust one, you might use a library
+        // This is a basic implementation to give the effect within a single file.
+        const particlesJS = function(id) {
+            const canvas = document.createElement('canvas');
+            const container = document.getElementById(id);
+            container.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationFrameId;
+
+            const resizeCanvas = () => {
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            };
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const createParticle = () => {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 1.5 + 0.5, // 0.5 to 2
+                    color: `rgba(97, 218, 251, ${Math.random() * 0.5 + 0.2})` // Tron blue with varying opacity
+                };
+            };
+
+            const initParticles = (count) => {
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push(createParticle());
+                }
+            };
+
+            const drawParticles = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+
+                    // Update position
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Boundary conditions
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+
+                    // Draw lines between nearby particles
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
+
+                        if (distance < 100) { // Max distance for a line
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(97, 218, 251, ${1 - (distance / 100)})`; // Fades with distance
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                animationFrameId = requestAnimationFrame(drawParticles);
+            };
+
+            // Public methods (optional, but good practice for a mini-library)
+            return {
+                init: function(count = 50) {
+                    initParticles(count);
+                    drawParticles();
+                },
+                stop: function() {
+                    cancelAnimationFrame(animationFrameId);
+                }
+            };
+        };
+
+        // Initialize particles
+        const myParticles = particlesJS('particles-js');
+        myParticles.init(70); // You can adjust the number of particles here
+
+    </script>
+</body>
+</html>
